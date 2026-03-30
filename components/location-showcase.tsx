@@ -45,7 +45,7 @@ export function LocationShowcase() {
               title: 'Seattle',
               subtitle: 'Modern Homes',
               image:
-                'https://images.unsplash.com/photo-1512027795669-2a7f2807dfd7?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop',
             },
             {
               title: 'Austin',
@@ -57,7 +57,7 @@ export function LocationShowcase() {
               title: 'Denver',
               subtitle: 'Mountain Views',
               image:
-                'https://images.unsplash.com/photo-1495933050929-81a97ccc9221?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&h=300&fit=crop',
             },
           ].map((location, index) => (
             <div

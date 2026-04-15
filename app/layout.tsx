@@ -8,10 +8,10 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Premium Real Estate - Find Your Dream Home',
-  description: 'Discover exclusive properties from trusted local experts. Professional real estate services for buying, selling, and investing.',
+  title: 'Dream House Real Estate | Find Your Perfect Home - 2.5K+ Properties',
+  description: 'Find your dream house with expert local agents. 2.5K+ properties sold, 98% client satisfaction, 15+ years experience. Buy, rent, or invest with transparent pricing and personalized guidance. Apartments, villas, commercial, warehouses & more.',
   generator: 'v0.app',
-  icons: {
+/*   icons: {
     icon: [
       {
         url: '/icon-light-32x32.png',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
       },
     ],
     apple: '/apple-icon.png',
-  },
+  }, */
   viewport: {
     width: 'device-width',
     initialScale: 1,

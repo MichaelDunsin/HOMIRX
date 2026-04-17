@@ -1,4 +1,7 @@
+'use client'
+
 import { Quote } from 'lucide-react'
+import { useScrollAnimation } from '@/hooks/use-scroll-animation'
 
 const testimonials = [
   {
@@ -28,11 +31,15 @@ const testimonials = [
 ]
 
 export function Testimonials() {
+  const { ref, isVisible } = useScrollAnimation()
+
   return (
     <section className="w-full bg-primary text-primary-foreground py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center space-y-4 mb-16">
+        <div className={`text-center space-y-4 mb-16 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <h2 className="text-4xl lg:text-5xl font-bold text-balance">
             What Our Clients Say
           </h2>
@@ -43,10 +50,17 @@ export function Testimonials() {
 
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial) => (
+          {testimonials.map((testimonial, index) => (
             <div
               key={testimonial.id}
-              className="bg-white/10 border border-white/20 rounded-2xl p-8 space-y-4 hover:bg-white/15 hover:border-accent/50 transition-all duration-300"
+              className={`bg-white/10 border border-white/20 rounded-2xl p-8 space-y-4 hover:bg-white/15 hover:border-accent/50 transition-all duration-300 ${
+                isVisible
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-8'
+              }`}
+              style={{
+                transitionDelay: isVisible ? `${index * 100}ms` : '0ms',
+              }}
             >
               {/* Quote Icon */}
               <Quote className="w-6 h-6 text-accent" />

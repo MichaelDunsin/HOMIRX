@@ -3,6 +3,7 @@
 import { Heart, MapPin, Bed, Bath, Ruler } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
+import { useScrollAnimation } from '@/hooks/use-scroll-animation'
 
 interface Property {
   id: string
@@ -63,6 +64,7 @@ const properties: Property[] = [
 
 export function FeaturedListings() {
   const [favorites, setFavorites] = useState<Set<string>>(new Set())
+  const { ref, isVisible } = useScrollAnimation()
 
   const toggleFavorite = (id: string) => {
     const newFavorites = new Set(favorites)
@@ -76,9 +78,11 @@ export function FeaturedListings() {
 
   return (
     <section className="w-full bg-background py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-12">
+        <div className={`flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-12 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <div className="space-y-2">
             <p className="text-accent font-semibold text-sm">Our Listings</p>
             <h2 className="text-4xl font-bold text-foreground">
@@ -104,10 +108,17 @@ export function FeaturedListings() {
 
         {/* Properties Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {properties.map((property) => (
+          {properties.map((property, index) => (
             <div
               key={property.id}
-              className="bg-card border border-border rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 group"
+              className={`bg-card border border-border rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 group ${
+                isVisible
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-8'
+              }`}
+              style={{
+                transitionDelay: isVisible ? `${index * 100}ms` : '0ms',
+              }}
             >
               {/* Image Container */}
               <div className="relative h-64 overflow-hidden">

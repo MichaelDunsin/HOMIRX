@@ -1,31 +1,56 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 import { Clock } from 'lucide-react'
+import { useScrollAnimation } from '@/hooks/use-scroll-animation'
 
 export function FinalCTA() {
+  const { ref, isVisible } = useScrollAnimation()
+
   return (
     <section className="w-full bg-gradient-to-r from-primary via-primary to-primary/90 text-primary-foreground py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div ref={ref} className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-6">
           {/* Headline */}
-          <h2 className="text-4xl lg:text-6xl font-bold text-balance">
+          <h2 className={`text-4xl lg:text-6xl font-bold text-balance transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
             Ready to Find Your Perfect Home?
           </h2>
 
           {/* Description */}
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className={`text-xl text-gray-300 max-w-2xl mx-auto transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+          style={{
+            transitionDelay: isVisible ? '100ms' : '0ms',
+          }}
+          >
             Don't miss out on your dream property. The right home doesn't stay available for long.
             <br />
             Let our expert agents guide you every step of the way.
           </p>
 
           {/* Urgency Message */}
-          <div className="flex items-center justify-center gap-2 text-accent font-semibold pt-4">
+          <div className={`flex items-center justify-center gap-2 text-accent font-semibold pt-4 transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+          style={{
+            transitionDelay: isVisible ? '200ms' : '0ms',
+          }}
+          >
             <Clock className="w-5 h-5" />
             <span>Limited inventory available. Schedule now.</span>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+          <div className={`flex flex-col sm:flex-row gap-4 justify-center pt-4 transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+          style={{
+            transitionDelay: isVisible ? '300ms' : '0ms',
+          }}
+          >
             <Button
               size="lg"
               className="bg-accent text-primary hover:bg-accent/90 font-semibold px-8"
@@ -42,7 +67,13 @@ export function FinalCTA() {
           </div>
 
           {/* Trust Signals */}
-          <div className="grid grid-cols-3 gap-4 pt-8 border-t border-white/20">
+          <div className={`grid grid-cols-3 gap-4 pt-8 border-t border-white/20 transition-all duration-700 ${
+            isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+          }`}
+          style={{
+            transitionDelay: isVisible ? '400ms' : '0ms',
+          }}
+          >
             <div>
               <p className="text-2xl font-bold">100%</p>
               <p className="text-sm text-gray-300">Confidential</p>

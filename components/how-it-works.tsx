@@ -1,4 +1,7 @@
+'use client'
+
 import { MessageCircle, Eye, Handshake, FileCheck } from 'lucide-react'
+import { useScrollAnimation } from '@/hooks/use-scroll-animation'
 
 const steps = [
   {
@@ -32,11 +35,13 @@ const steps = [
 ]
 
 export function HowItWorks() {
+  const { ref, isVisible } = useScrollAnimation()
+
   return (
     <section className="w-full bg-background py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center space-y-4 mb-16">
+        <div className={`text-center space-y-4 mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground text-balance">
             How the Process Works
           </h2>
@@ -57,7 +62,15 @@ export function HowItWorks() {
                 )}
 
                 {/* Card */}
-                <div className="relative bg-card border border-border rounded-2xl p-6 space-y-4 h-full hover:border-accent hover:shadow-lg transition-all duration-300">
+                <div className={`relative bg-card border border-border rounded-2xl p-6 space-y-4 h-full hover:border-accent hover:shadow-lg transition-all duration-300 ${
+                  isVisible
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-8'
+                }`}
+                style={{
+                  transitionDelay: isVisible ? `${index * 100}ms` : '0ms',
+                }}
+                >
                   {/* Step Number */}
                   <div className="flex items-center justify-between">
                     <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center">

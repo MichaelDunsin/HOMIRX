@@ -1,11 +1,18 @@
+'use client'
+
 import { MapPin } from 'lucide-react'
+import { useScrollAnimation } from '@/hooks/use-scroll-animation'
 
 export function LocationShowcase() {
+  const { ref, isVisible } = useScrollAnimation()
+
   return (
     <section className="w-full bg-primary text-primary-foreground py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-12">
+        <div className={`mb-12 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <p className="text-accent font-semibold text-sm mb-2">Our Property List</p>
           <h2 className="text-4xl lg:text-5xl font-bold">Our Top Location For You Property</h2>
         </div>
@@ -13,7 +20,9 @@ export function LocationShowcase() {
         {/* Location Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3">
           {/* Large Featured Location */}
-          <div className="md:col-span-2 lg:col-span-2 lg:row-span-2 relative h-64 md:h-auto lg:h-96 rounded-2xl overflow-hidden group cursor-pointer">
+          <div className={`md:col-span-2 lg:col-span-2 lg:row-span-2 relative h-64 md:h-auto lg:h-96 rounded-2xl overflow-hidden group cursor-pointer transition-all duration-700 ${
+            isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+          }`}>
             <img
               src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=500&h=600&fit=crop"
               alt="California"
@@ -62,7 +71,14 @@ export function LocationShowcase() {
           ].map((location, index) => (
             <div
               key={index}
-              className="relative h-48 rounded-2xl overflow-hidden group cursor-pointer"
+              className={`relative h-48 rounded-2xl overflow-hidden group cursor-pointer transition-all duration-700 ${
+                isVisible
+                  ? 'opacity-100 scale-100'
+                  : 'opacity-0 scale-95'
+              }`}
+              style={{
+                transitionDelay: isVisible ? `${(index + 1) * 100}ms` : '0ms',
+              }}
             >
               <img
                 src={location.image || "/placeholder.svg"}

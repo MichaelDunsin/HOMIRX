@@ -13,14 +13,30 @@ export default function Home() {
   return (
     <main className="flex flex-col w-full">
       <Header />
-      <Hero />
-      <PropertyTypes />
-      <FeaturedListings />
-      <HowItWorks />
-      <Testimonials />
-      <LocationShowcase />
-      <FAQSection />
-      <FinalCTA />
+      <section id="hero">
+        <Hero />
+      </section>
+      <section id="property-types">
+        <PropertyTypes />
+      </section>
+      <section id="featured-listings">
+        <FeaturedListings />
+      </section>
+      <section id="how-it-works">
+        <HowItWorks />
+      </section>
+      <section id="testimonials">
+        <Testimonials />
+      </section>
+      <section id="location-showcase">
+        <LocationShowcase />
+      </section>
+      <section id="faq">
+        <FAQSection />
+      </section>
+      <section id="final-cta">
+        <FinalCTA />
+      </section>
       <Footer />
     </main>
   )

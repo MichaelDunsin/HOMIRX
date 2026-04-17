@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
+import { useScrollAnimation } from '@/hooks/use-scroll-animation'
 
 const faqs = [
   {
@@ -44,12 +45,15 @@ const faqs = [
 
 export function FAQSection() {
   const [openId, setOpenId] = useState<string | null>('1')
+  const { ref, isVisible } = useScrollAnimation()
 
   return (
     <section className="w-full bg-background py-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div ref={ref} className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center space-y-4 mb-12">
+        <div className={`text-center space-y-4 mb-12 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground text-balance">
             Frequently Asked Questions
           </h2>
@@ -60,10 +64,17 @@ export function FAQSection() {
 
         {/* FAQ Items */}
         <div className="space-y-3">
-          {faqs.map((faq) => (
+          {faqs.map((faq, index) => (
             <div
               key={faq.id}
-              className="bg-card border border-border rounded-xl overflow-hidden hover:border-accent transition-colors"
+              className={`bg-card border border-border rounded-xl overflow-hidden hover:border-accent transition-all duration-300 ${
+                isVisible
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-8'
+              }`}
+              style={{
+                transitionDelay: isVisible ? `${index * 50}ms` : '0ms',
+              }}
             >
               <button
                 onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
@@ -73,7 +84,7 @@ export function FAQSection() {
                   {faq.question}
                 </h3>
                 <ChevronDown
-                  className={`w-5 h-5 text-accent flex-shrink-0 transition-transform duration-300 ${
+                  className={`w-5 h-5 text-accent shrink-0 transition-transform duration-300 ${
                     openId === faq.id ? 'rotate-180' : ''
                   }`}
                 />
@@ -90,7 +101,13 @@ export function FAQSection() {
         </div>
 
         {/* Additional Help */}
-        <div className="mt-12 bg-accent/10 border border-accent/30 rounded-2xl p-8 text-center">
+        <div className={`mt-12 bg-accent/10 border border-accent/30 rounded-2xl p-8 text-center transition-all duration-700 ${
+          isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+        }`}
+        style={{
+          transitionDelay: isVisible ? '200ms' : '0ms',
+        }}
+        >
           <h3 className="text-2xl font-bold text-foreground mb-2">
             Still have questions?
           </h3>

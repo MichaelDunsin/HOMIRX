@@ -146,13 +146,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="flex flex-col items-center gap-2 text-gray-400">
-          <span className="text-sm">Scroll to explore</span>
-          <div className="w-1 h-8 border-l-2 border-gray-400" />
-        </div>
-      </div>
+ 
     </section>
   )
 }
